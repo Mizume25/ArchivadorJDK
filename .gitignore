@@ -1,0 +1,36 @@
+# Eclipse
+.metadata/
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
+
+# Archivos específicos de Eclipse
+.classpath
+.project  # 👈 OPCIÓN: Si quieres compartir configuración básica, déjalo fuera
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+
+# Logs
+*.log
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Output
+*.class
+*.jar
+*.war
+*.ear

@@ -61,8 +61,8 @@ public class MetodosMatriceslib {
 // SECCIÓN 2: MÉTODOS DE MOSTRAR DATOS
 // ============================================
 
-// MÉTODO: Imprime la matriz completa
-// PARÁMETROS: 1 matriz de int
+	// MÉTODO: Imprime la matriz completa
+	// PARÁMETROS: 1 matriz de int
 	public static void mostrarMatriz(int[][] tabla) {
 		// Recorrer filas
 		for (int fila = 0; fila < tabla.length; fila++) {
@@ -73,50 +73,163 @@ public class MetodosMatriceslib {
 			System.out.println(); // Salto de línea después de cada fila
 		}
 	}
-	
+
 	// MÉTODO: MOSTRAR MATRIZ CON FORMATO DE TABLA
 	// PARÁMETROS: ARRAY DE STRINGS, MATRIZ DE INT, NUMCOLUMNAS, NUMFILAS
-		public static void mostrarMatrizFormatoTabla (int [][] tabla, String [] listaNombres, int numFilas, int numcolumnas,String encabezadoSuperior,String tituloFilas) {
+	public static void mostrarMatrizFormatoTabla(int[][] tabla, String[] listaNombres, int numFilas, int numcolumnas,
+			String encabezadoSuperior, String tituloFilas) {
 
-			// 1. Calculamos el ancho del equipo dinámicamente según el nombre más largo
-			int anchoEquipo = 10; 
-			// CORRECTO: listaNombres tiene numFilas elementos
-			for (int i = 0; i < numFilas; i++) {  // ← Cambiado a numFilas
-			    if (listaNombres[i].length() > anchoEquipo) {
-			        anchoEquipo = listaNombres[i].length() + 2;
-			    }
+		// 1. Calculamos el ancho del equipo dinámicamente según el nombre más largo
+		int anchoEquipo = 10;
+		// CORRECTO: listaNombres tiene numFilas elementos
+		for (int i = 0; i < numFilas; i++) { // ← Cambiado a numFilas
+			if (listaNombres[i].length() > anchoEquipo) {
+				anchoEquipo = listaNombres[i].length() + 2;
 			}
-
-			// 2. Definimos el ancho fijo de cada columna de datos
-			int esp = 6; 
-
-			// 3. CABECERA DINÁMICA (J1 a JX...)
-			System.out.printf("%-" + anchoEquipo + "s", encabezadoSuperior);
-			// CORRECTO: Los encabezados corresponden a COLUMNAS, no filas
-			for (int j = 0; j < numcolumnas; j++) {  // ← Cambiado a numcolumnas
-			    System.out.printf("%-" + esp + "s", tituloFilas + (j + 1)); 
-			}
-			System.out.println();
-
-			// Línea decorativa dinámica
-			int totalGuiones = anchoEquipo + (numcolumnas * esp);  // ← Cambiado a numcolumnas
-			for(int k = 0; k < totalGuiones; k++) System.out.print("-");
-			System.out.println();
-
-			// 4. FILAS DINÁMICAS
-			// CORRECTO: Recorrer filas
-			for (int i = 0; i < numFilas; i++) {
-			    // Nombre del equipo (por fila)
-			    System.out.printf("%-" + anchoEquipo + "s", listaNombres[i]);
-			    
-			    // CORRECTO: Recorrer columnas de esa fila
-			    for (int j = 0; j < numcolumnas; j++) {
-			        System.out.printf("%-" + esp + "d", tabla[i][j]);
-			    }
-			    System.out.println();
-			}
-		    
 		}
+
+		// 2. Definimos el ancho fijo de cada columna de datos
+		int esp = 6;
+
+		// 3. CABECERA DINÁMICA (J1 a JX...)
+		System.out.printf("%-" + anchoEquipo + "s", encabezadoSuperior);
+		// CORRECTO: Los encabezados corresponden a COLUMNAS, no filas
+		for (int j = 0; j < numcolumnas; j++) { // ← Cambiado a numcolumnas
+			System.out.printf("%-" + esp + "s", tituloFilas + (j + 1));
+		}
+		System.out.println();
+
+		// Línea decorativa dinámica
+		int totalGuiones = anchoEquipo + (numcolumnas * esp); // ← Cambiado a numcolumnas
+		for (int k = 0; k < totalGuiones; k++)
+			System.out.print("-");
+		System.out.println();
+
+		// 4. FILAS DINÁMICAS
+		// CORRECTO: Recorrer filas
+		for (int i = 0; i < numFilas; i++) {
+			// Nombre del equipo (por fila)
+			System.out.printf("%-" + anchoEquipo + "s", listaNombres[i]);
+
+			// CORRECTO: Recorrer columnas de esa fila
+			for (int j = 0; j < numcolumnas; j++) {
+				System.out.printf("%-" + esp + "d", tabla[i][j]);
+			}
+			System.out.println();
+		}
+
+	}
+
+	// MÉTODO: ORDENAR MATRIZ CON METODO BOMBOLLA DE MAYOR A MENOR
+	// PARÁMETROS: ARRAY DE STRINGS, MATRIZ DE INT, NUMCOLUMNAS, NUMFILAS
+	public static void ordenarFilasMatrizAscendente(int[][] tabla) {
+	    if (tabla == null || tabla.length == 0) {
+	        return;
+	    }
+	    
+	    int n = tabla.length; // Número de filas
+	    int m = tabla[0].length; // Número total de columnas
+	    
+	    // Validar que haya al menos 2 columnas (ID + datos)
+	    if (m < 2) {
+	        System.out.println("Error: La matriz debe tener al menos 2 columnas");
+	        return;
+	    }
+	    
+	    // Validar que todas las filas tengan la misma longitud
+	    for (int i = 1; i < n; i++) {
+	        if (tabla[i].length != m) {
+	            System.out.println("Error: Las filas no tienen la misma longitud");
+	            return;
+	        }
+	    }
+
+	    // CALCULAR SUMAS IGNORANDO LA PRIMERA COLUMNA (ID)
+	    int[] sumas = new int[n];
+	    
+	    for (int i = 0; i < n; i++) {
+	        int sumaFila = 0;
+	        // Empezar desde j=1 para saltar la primera columna (ID)
+	        for (int j = 1; j < m; j++) {
+	            sumaFila += tabla[i][j];
+	        }
+	        sumas[i] = sumaFila;
+	        System.out.println("Fila " + i + " (ID " + tabla[i][0] + "): suma = " + sumas[i]);
+	    }
+
+	    // ORDENAR ASCENDENTE (menor arriba, mayor abajo)
+	    boolean cambios;
+	    do {
+	        cambios = false;
+	        for (int i = 0; i < n - 1; i++) {
+	            // Para orden ASCENDENTE: intercambiar si el actual es MAYOR que el siguiente
+	            if (sumas[i] > sumas[i + 1]) {
+	                // Intercambiar sumas
+	                int tempSuma = sumas[i];
+	                sumas[i] = sumas[i + 1];
+	                sumas[i + 1] = tempSuma;
+
+	                // Intercambiar filas completas (incluyendo el ID)
+	                int[] tempFila = tabla[i];
+	                tabla[i] = tabla[i + 1];
+	                tabla[i + 1] = tempFila;
+
+	                cambios = true;
+	            }
+	        }
+	    } while (cambios);
+
+	    // Mostrar resultado
+	    System.out.println("\n--- Matriz ordenada ---");
+	    for (int i = 0; i < n; i++) {
+	        System.out.print("Fila " + i + ": ID " + tabla[i][0] + " | Datos: ");
+	        int suma = 0;
+	        for (int j = 1; j < m; j++) {
+	            System.out.print(tabla[i][j] + " ");
+	            suma += tabla[i][j];
+	        }
+	        System.out.println("→ Suma = " + suma);
+	    }
+	}
+	
+	public static void ordenarFilasMatrizDescendente(int[][] tabla) {
+	    int n = tabla.length; // Número de filas (equipos)
+	    int m = tabla[0].length; // Número de columnas (jornadas)
+
+	    // SUMAMOS CADA FILA
+	    int[] sumas = new int[n];
+
+	    for (int i = 0; i < n; i++) {
+	        int sumaFila = 0;
+	        for (int j = 0; j < m; j++) {
+	            sumaFila += tabla[i][j];
+	        }
+	        sumas[i] = sumaFila;
+	    }
+
+	    // Paso 2: ORDENAR FILAS EN ORDEN DESCENDENTE (mayor arriba, menor abajo)
+	    boolean cambios;
+	    do {
+	        cambios = false;
+	        for (int i = 0; i < n - 1; i++) {
+	            // PARA ORDEN DESCENDENTE: si la suma actual es MENOR que la siguiente
+	            // La intercambiamos para que la MAYOR quede primero
+	            if (sumas[i] < sumas[i + 1]) {  // Esta condición está BIEN para descendente
+	                // Intercambiar sumas
+	                int tempSuma = sumas[i];
+	                sumas[i] = sumas[i + 1];
+	                sumas[i + 1] = tempSuma;
+
+	                // Intercambiar filas completas
+	                int[] tempFila = tabla[i];
+	                tabla[i] = tabla[i + 1];
+	                tabla[i + 1] = tempFila;
+
+	                cambios = true;
+	            }
+	        }
+	    } while (cambios);
+	}
 
 	// ============================================
 	// SECCIÓN 3: CALCULOS MATEMATICOS

@@ -35,9 +35,7 @@ public class Act6 {
 		// Calculamos las jornadas en base a la cantidad de equipos que hay Expresion:
 		// (numEquipos - 1) * 2
 	}
-	
 	// 1º Funcion llenar array de Strings usuario con los nombres de los clubes del
-		// array String Base
 	public static void llenarNombresEquipos(String[] equiposLaLiga, String[] equiposUsuario) {
 		// Array para marcar qué índices ya hemos usado
 	    boolean[] usado = new boolean[equiposLaLiga.length];
@@ -54,7 +52,6 @@ public class Act6 {
 	        usado[index] = true; // Marcamos este número como "ya usado"
 	    }
 	}
-
 	// 2º Funcion que calcula el numero de puntos de cada equipo
 	public static void llenarDatosEquiposLiga(int[][] tablaDeportiva, int numEquipos, int numJornadas,
 			int[][] tablaResultado, int[][] tablaTiros, int[][] totalResultado) {
@@ -112,7 +109,6 @@ public class Act6 {
 		} while (filas < tablaDeportiva.length);
 
 	}
-
 	// 3º - Funcion que ordena la matriz con metodo bombolla
 	public static void OrdenarTablaLiga(int[][] tablaDeportiva) {
 
@@ -147,7 +143,6 @@ public class Act6 {
 		} while (cambios);
 
 	}
-
 	// 4º Funcion que calcula Goles a favor
 	public static void golesEquiposGF(int[][] tablaDeportiva, int numEquipos, int numJornadas,double [] golesFA) {
 
@@ -172,9 +167,8 @@ public class Act6 {
 			filas++;
 		} while (filas < tablaDeportiva.length);
 	}
-	
 	// 4º Funcion que calcula Goles a favor
-		public static void golesEquiposGC(int[][] tablaDeportiva, int numEquipos, int numJornadas, double [] golesCO) {
+	public static void golesEquiposGC(int[][] tablaDeportiva, int numEquipos, int numJornadas, double [] golesCO) {
 
 			int filas;
 			int totalPuntos;
@@ -196,8 +190,7 @@ public class Act6 {
 				tablaDeportiva[filas][3] = totalPuntos;
 				filas++;
 			} while (filas < tablaDeportiva.length);
-		}
-
+	}
 	// 5º Funcion que Calcula diferencia de goles
 	public static void diferenciaGol(int[][] tablaDeportiva) {
 
@@ -214,7 +207,6 @@ public class Act6 {
 
 		} while (filas < tablaDeportiva.length);
 	}
-
 	// 6º - Calcular la efectividad de un equipo
 	public static void calcularEfectividadEquipo(int[][] tablaDeportiva, int[][] tablaTiros,int numEquipos,double [] efectividadEquipo) {
 		
@@ -240,7 +232,6 @@ public class Act6 {
 		} while (filas < tablaDeportiva.length);
 
 	}
-	
 	//7º - Funcion para calcular probabilidad de victoria de cada equipo
 	public static void calcularProbVictoria(int [][] tablaDeportiva,double [] probabilidadVictoria) {
 		
@@ -356,8 +347,7 @@ public class Act6 {
 		for (int k = 0; k < anchoTotal; k++) System.out.print("—");
 		System.out.println("┘");
 		
-	}	
-	
+	}		
 	// 9º Efectividad y probabilidad con pronosticos de cada equipo con formato tabla
 	public static void  mostrardatosLaligaFormato (String [] equiposUsuario, double[] efectividadEquipo,  double []probabilidadVictoria) {
 		// --- CONFIGURACIÓN DE ANCHOS ---
@@ -401,7 +391,6 @@ public class Act6 {
 		for (int k = 0; k < anchoTotal_Ef; k++) System.out.print("—");
 		System.out.println("┘");
 	}
-	
 	//10 º Mostrar tabla de resultados con formato
 	public static void mostrarResultadoJornadasFormato(int numEquipos, String[] equiposUsuario,int numJornadas,int[][]tablaResultado) {
 		// 1. Calculamos el ancho del equipo dinámicamente según el nombre más largo
@@ -464,7 +453,6 @@ public class Act6 {
 	    
 	    return encontrado;
 	}
-	
 	//12º Busca la posicon especifica de un equipo una vez encontrado
 	public static int posicionEquipo(String nombre, String[] equiposUsuario) {
 		int index = 0;
@@ -484,7 +472,6 @@ public class Act6 {
 		
 		
 	}
-	
 	//13º Print del menu principal de la base de datos
 	public static int menuPrincipal () {
 		
@@ -501,8 +488,7 @@ public class Act6 {
 		System.out.println("\n Introduzca la accion busque realizar: ");
 		return sc.nextInt();
 		
-	}
-	
+	}	
 	//14º Ordena la secuencia de victorias y derrotas de un equipo
 	public static void ordenarTablaResultado(int[][] tablaResultado) {
 	    
@@ -541,8 +527,7 @@ public class Act6 {
 	            }
 	        }
 	    } while (cambios);
-	}
-	
+	}	
 	//15º Muestra lista de equipos que el programa ha analizado
 	public static void mostrarListaEquipos(String [] equiposUsuario) {
 		System.out.println("==Equipos que se han somteido a analisis=");
@@ -550,7 +535,6 @@ public class Act6 {
 			System.out.println(equiposUsuario[i] + " ");
 		}
 	}
-	
 	//16º Funcion que muestra Datos Generales de Laliga
 	public static void mostrarDatosGenerales (int [][] tablaDeportiva,double [] golesFA,double [] golesCO,String [] equiposUsuario, int numJornadas) {
 		//CALCULOS GENERALES
@@ -589,7 +573,6 @@ public class Act6 {
 						+ "es %s\ncon un promedio de %.2f%% goles en el total de %d jornadas jugadas",equiposUsuario[indexCO],golesFA[indexCO],numJornadas);
 				System.out.println();
 	}
-	
 	// 17º Funcion para mostrar datos de un equipo especifico
 	public static void mostrarDatosEquipoEspecifico(int [][] tablaDeportiva,double [] golesFA,double [] golesCO,String [] equiposUsuario, int numJornadas,
 	double [] probabilidadVictoria, double [] efectividadEquipo, int [][]totalResultado, int numEquipos, int [][]tablaResultado,int[][] tablaTiros) {
@@ -695,7 +678,7 @@ public class Act6 {
 			
 			} 
 	}
-	
+	// 18 º Mostrar Tabla de Tiros a puerta con formato tabla
 	public static void mostrarTablaTirosPuerta (int [][] tablaTiros, String [] equiposUsuario, int numEquipos, int numJornadas) {
 		int n = tablaTiros.length; // Número de filas (equipos)
 	    int m = tablaTiros[0].length; // Número de columnas (jornadas)
@@ -771,28 +754,28 @@ public class Act6 {
 	    
 	}
 	
-	
-	
 	public static void main(String[] args) {	
-		//Declaracion de variables base
+		
+		//DECLARAMOS VARIABLES BASE
 		int numEquipos;
 		int numJornadas;
-		//DECLARAMOS UN ARRAY DE STRINGS BASE CON NOMBRES DE LA LA LIGA
+		
+		//DECLARAMOS UN ARRAY DE STRINGS BASE CON NOMBRES DE LA LA LIGA BASE
 		String[] equiposLaLiga = { "Real Madrid", "FC Barcelona", "Atlético Madrid", "Villarreal CF", "Real Betis",
 				"Athletic Club", "Real Sociedad", "Girona FC", "Sevilla FC", "Valencia CF", "RC Celta", "RCD Espanyol",
 				"CA Osasuna", "Getafe CF", "Rayo Vallecano", "RCD Mallorca", "Deportivo Alavés", "Elche CF",
 				"Levante UD", "Real Oviedo" };
 		
-		//INICIALIZAMOS
+		//INICIALIZAMOS VARIABLES
 		numEquipos = 5;
 		numJornadas = 0;
-		numEquipos = pedirNumeroEquipos(numEquipos);
-		numJornadas = (numEquipos - 1) * 2;
 		
+		numEquipos = pedirNumeroEquipos(numEquipos);	//EJECUTAMOS LA FUNCION BASE
+		numJornadas = (numEquipos - 1) * 2;				//CALCULAMOS LA SEGUNDA VARIABLE BASE DEL PROGRAMA
 		
+		//ENUNCIADO DE INICIO
 		System.out.println("\n[INFO]: Configuración aceptada.");
-		System.out
-				.println("Para " + numEquipos + " equipos, se analizarán " + numJornadas + " jornadas (Ida y Vuelta).");
+		System.out.println("Para " + numEquipos + " equipos, se analizarán " + numJornadas + " jornadas (Ida y Vuelta).");
 		System.out.println();
 		
 		
@@ -804,14 +787,13 @@ public class Act6 {
 		//Matriz madre que se pesupondra base de todo el programa y de las cuales surjen todas las operaciones subsecuentes
 		
 		//Matrices Estaticas/Dinamicas
-		int[][] tablaDeportiva = new int[numEquipos][5];		//Tabla General de LaLiga
-		int[][] totalResultado = new int[numEquipos][3];		//Tabla Resultados generales de victorias / Derrotas / Empates en todas las jornadas
-		
+		int[][] tablaDeportiva = new int[numEquipos][5];				//TABLA GENERAL DE RESULTADOS
+		int[][] totalResultado = new int[numEquipos][3];				//TABLA GENERAL TOTAL DE VICTORIAS / DERROTAS / EMPATES DE UN EQUIPO
 		//Matrices Dinamicas
-		double [] efectividadEquipo = new double[numEquipos];	//Efectividad de un equipo de futbol
-		double [] probabilidadVictoria = new double [numEquipos];	//Probabilidad de un equipo de futbol
-		int[][] tablaTiros = new int[numEquipos][numJornadas];	// Tiros a puerta de un equipo en todas las jornadas
-		int[][] tablaResultado = new int[numEquipos][numJornadas];	//Tabla que muestra  el punto obtenido por jornada jugada
+		double [] efectividadEquipo = new double[numEquipos];			//EFECTIVIDAD DE EQUIPO
+		double [] probabilidadVictoria = new double [numEquipos];		//PROBABILIDAD DE VICTORIA
+		int[][] tablaTiros = new int[numEquipos][numJornadas];			//TABLA DE TIROS A PUERTA POR JORNADA JUGADA
+		int[][] tablaResultado = new int[numEquipos][numJornadas];		//TABLA QUE REGISTRA LAS DERROTAS Y VICTORISA Y EMPATES QUE HUBO
 		double [] golesFA = new double [numEquipos];
 		double [] golesCO = new double [numEquipos];
 		
@@ -832,39 +814,48 @@ public class Act6 {
 		 * PARA FUTURAS MODIFICACIONES SENCILLAMENTE HAY QUE MODIFICAR LOS RANGOS
 		 * */
 		
-		//Ejecuccion de las funciones DE CALCULO
+		//EJECUCCION DE TODAS LAS FUNCIONES DE CALCULO
 		
-		//1º - Llenar de nombres al String del usuario
+		//	1.1LLENADO DE DATOS
+		
+		//1º - LLENAMOS EL ARRAY DE EQUIPOS ALEATORIOS CON UN ESTRUCTURA DE DESCARTE
 		llenarNombresEquipos(equiposLaLiga, equiposUsuario);
 		
-		//2º - LLenar de datos la tabla general y las demas subtabla de datos (los datos como ya dije en relacion con los valores base (puntos de un equipo))
+		//2º - LLENAR DE DATOS GENERALES A LOS EQUIPOS
 		llenarDatosEquiposLiga(tablaDeportiva, numEquipos, numJornadas, tablaResultado, tablaTiros, totalResultado);
 		
-		//3º - Ordenaremos la tabla base en un orden de mayor a menor 
-		OrdenarTablaLiga(tablaDeportiva);
-		ordenarTablaResultado(tablaResultado);
-		//4º - Funcion que dota a la primera fila de la tabla base de "posiciones" a los equipos
-		MetodosMatriceslib.idsAutoIncrementadas(tablaDeportiva);
-		
-		//5º - Funcion que dota a la tabla base de datos en columnas
-		golesEquiposGF(tablaDeportiva, numEquipos, numJornadas,golesFA);		//Hacen lo mismo pero se gaurdan en 2 columnas diferentes
-		golesEquiposGC(tablaDeportiva, numEquipos, numJornadas,golesCO);		
-		
-		//NOTA: Sip los goles son aleatorios pero recordemos que la tabla se rige por puntos si pierden no importa cuantos marque - perdieron
-		
-		//6º - Funcion que dota a la tabla de una columna de la resta de GF - GC 
+		//3º - FUNCION QUE DOTA DE GOLES A FAVOR Y ENCONTRA LLENA LA MATRIZ PRINCIPAL JUNTO A LA DIFERENCIA DE GOLES
+		golesEquiposGF(tablaDeportiva, numEquipos, numJornadas,golesFA);		
+		golesEquiposGC(tablaDeportiva, numEquipos, numJornadas,golesCO);
 		diferenciaGol(tablaDeportiva);
 		
-		//7º - Funcion que calcula la efectividad de un equipo
+		// 4º - FUNCION QUE DOTA LAS POSICIONES A LA MATRIZ DEPORTIVA
+		MetodosMatriceslib.idsAutoIncrementadas(tablaDeportiva);
+		
+		// 1.2 ORDENAMIENTO DE DATOS
+		
+		//5º - ORDENAMIENTO DE TABLAS DE MAYOR A MENOR - TABLADEPORTIVA | TABLA RESULTADO
+		OrdenarTablaLiga(tablaDeportiva);
+		ordenarTablaResultado(tablaResultado);
+		
+		// 1.3 CALCULO DE DATOS
+		
+		//7º - FUNCION QUE CALCULA LA EFECTIVIDAD DE EL EQUIPO
 		calcularEfectividadEquipo(tablaDeportiva, tablaTiros, numEquipos, efectividadEquipo);
 		
-		//8º - Funcion que calcula la probabiliad de victoria
+		//8º - FUNCION QUE CALCULA LA PROBABILIDAD DE VICTORIA
 		calcularProbVictoria(tablaDeportiva, probabilidadVictoria);
 		
+		
+		/*==========================================================/
+		  MENU PRINCIPAL INTERACTIVO PARA RECORRER TODA LA MATRIZ
+		/==========================================================*/
+		
+		//ESTRUCTURA DE CONTROL PRINCIPAL
 		boolean sistema;
 		sistema = true;
 		
-		//SubMenu
+		//SUB MENU
 		String menu = "\n=== MENÚ LALIGA ===" +
 	              "\n1. Tabla General" + 
 	              "\n2. Rendimiento" + 
@@ -876,12 +867,14 @@ public class Act6 {
 	              "\n8. Salir" + 
 	              "\n\nOpción: ";
 		
-		// Mostrar Resultados
-		int numUsuario = menuPrincipal();
+		// MOSTRAR MENU PRINCIPAL
+		int numUsuario = menuPrincipal();	//FUNCION QUE IMPRIME UN MENU PRINCIPAL
+		
+		//ESTRUCTURA DO WHILE QUE MANTINE EN VIGENCIA EL MENU INTERACTIVO
 		do {
 			switch (numUsuario) {
 			case 1:
-				mostrarTablaGeneralFormato(equiposUsuario, tablaDeportiva, efectividadEquipo, probabilidadVictoria);
+				mostrarTablaGeneralFormato(equiposUsuario, tablaDeportiva, efectividadEquipo, probabilidadVictoria); 
 				break;
 			case 2:
 				mostrardatosLaligaFormato(equiposUsuario, efectividadEquipo, probabilidadVictoria);
@@ -911,7 +904,7 @@ public class Act6 {
 				break;
 			}
 
-			// Solo pedir nueva opción si NO estamos saliendo
+			
 			if (sistema && numUsuario != 8) {
 				numUsuario = MetodosEntradaslib.numeroUsuario(menu);
 			}

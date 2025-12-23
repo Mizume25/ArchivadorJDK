@@ -73,6 +73,50 @@ public class MetodosMatriceslib {
 			System.out.println(); // Salto de línea después de cada fila
 		}
 	}
+	
+	// MÉTODO: MOSTRAR MATRIZ CON FORMATO DE TABLA
+	// PARÁMETROS: ARRAY DE STRINGS, MATRIZ DE INT, NUMCOLUMNAS, NUMFILAS
+		public static void mostrarMatrizFormatoTabla (int [][] tabla, String [] listaNombres, int numFilas, int numcolumnas,String encabezadoSuperior,String tituloFilas) {
+
+			// 1. Calculamos el ancho del equipo dinámicamente según el nombre más largo
+			int anchoEquipo = 10; 
+			// CORRECTO: listaNombres tiene numFilas elementos
+			for (int i = 0; i < numFilas; i++) {  // ← Cambiado a numFilas
+			    if (listaNombres[i].length() > anchoEquipo) {
+			        anchoEquipo = listaNombres[i].length() + 2;
+			    }
+			}
+
+			// 2. Definimos el ancho fijo de cada columna de datos
+			int esp = 6; 
+
+			// 3. CABECERA DINÁMICA (J1 a JX...)
+			System.out.printf("%-" + anchoEquipo + "s", encabezadoSuperior);
+			// CORRECTO: Los encabezados corresponden a COLUMNAS, no filas
+			for (int j = 0; j < numcolumnas; j++) {  // ← Cambiado a numcolumnas
+			    System.out.printf("%-" + esp + "s", tituloFilas + (j + 1)); 
+			}
+			System.out.println();
+
+			// Línea decorativa dinámica
+			int totalGuiones = anchoEquipo + (numcolumnas * esp);  // ← Cambiado a numcolumnas
+			for(int k = 0; k < totalGuiones; k++) System.out.print("-");
+			System.out.println();
+
+			// 4. FILAS DINÁMICAS
+			// CORRECTO: Recorrer filas
+			for (int i = 0; i < numFilas; i++) {
+			    // Nombre del equipo (por fila)
+			    System.out.printf("%-" + anchoEquipo + "s", listaNombres[i]);
+			    
+			    // CORRECTO: Recorrer columnas de esa fila
+			    for (int j = 0; j < numcolumnas; j++) {
+			        System.out.printf("%-" + esp + "d", tabla[i][j]);
+			    }
+			    System.out.println();
+			}
+		    
+		}
 
 	// ============================================
 	// SECCIÓN 3: CALCULOS MATEMATICOS
@@ -201,26 +245,26 @@ public class MetodosMatriceslib {
 		}
 		return valorMinimo;
 	}
-	
-	// MÉTODO: Metodo que calcula el porcentaje respecto a un total 
+
+	// MÉTODO: Metodo que calcula el porcentaje respecto a un total
 	// PARÁMETROS: 1 matriz int, 1 int, 1 array double
 	public static void porcentajePorTotal(int[] valorTotalId, int total, double[] porcentajes, int rangodecimal) {
-		
-		//DECLARAMOS VARIABLES
+
+		// DECLARAMOS VARIABLES
 		double potencia = Math.pow(10, rangodecimal);
 		double valorRedondeado;
 		double porcentaje;
-			
-		//INICIALIZAMOS VARIABLES
+
+		// INICIALIZAMOS VARIABLES
 		valorRedondeado = 0.0;
 		porcentaje = 0.0;
 
 		for (int i = 0; i < valorTotalId.length; i++) {
-			
-			porcentaje = ((double) valorTotalId[i] / total) * 100; //CALCULAMOS PORCENTAJE
-			
-			valorRedondeado = Math.round(porcentaje * potencia) / potencia;//REDONDEAMOS VALOR A 0
-			
+
+			porcentaje = ((double) valorTotalId[i] / total) * 100; // CALCULAMOS PORCENTAJE
+
+			valorRedondeado = Math.round(porcentaje * potencia) / potencia;// REDONDEAMOS VALOR A 0
+
 			porcentajes[i] = valorRedondeado; // GUARDAMOS EL VALOR EN UN ARRAY DE DOUBLE
 		}
 	}

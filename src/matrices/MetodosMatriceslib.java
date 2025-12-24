@@ -395,6 +395,8 @@ public class MetodosMatriceslib {
             }
         } while (cambios);
     }
+    
+ 
 
     // MÉTODO: ORDENAR COLUMNA DE MATRIZ DESCENDENTE
     // PARÁMETROS: 1 matriz int, int columna
@@ -450,7 +452,24 @@ public class MetodosMatriceslib {
             }
         }
     }
-
+    
+	// MÉTODO: SUMA FILAS DESDE LA COLUMNA DESEADA
+    // PARÁMETROS: 1 array int, 1 matriz int, int columna
+    public static int sumaFilaMatriz( int[][] tabla, int fil) {
+    	int sumaTotal = 0;
+    	int filmax = fil + 1;
+    	for (int fila = fil; fila < filmax; fila++) {
+    		
+    		sumaTotal = 0;
+            
+            for (int columna = 0; columna < tabla[fila].length; columna++) {
+            	
+            	sumaTotal += tabla[fila][columna];
+            }
+        }
+    	
+    	return sumaTotal;
+    }
     // MÉTODO: SUMA COLUMNAS DE UNA MATRIZ
     // PARÁMETROS: 1 array int, 1 matriz int, int columna inicio, int máximo columnas
     public static void sumaColumnasMatriz(int[] sumaColumnas, int[][] tabla, int col, int maxColumnas) {
@@ -512,21 +531,75 @@ public class MetodosMatriceslib {
         return valorMinimo;
     }
 
-    // MÉTODO: CALCULA EL PORCENTAJE RESPECTO A UN TOTAL
-    // PARÁMETROS: 1 array int, 1 int total, 1 array double porcentajes, int rangodecimal
-    public static void porcentajePorTotal(int[] valorTotalId, int total, double[] porcentajes, int rangodecimal) {
-        double potencia = Math.pow(10, rangodecimal);
-        double valorRedondeado;
-        double porcentaje;
-        
-        valorRedondeado = 0.0;
-        porcentaje = 0.0;
-        
-        for (int i = 0; i < valorTotalId.length; i++) {
-            porcentaje = ((double) valorTotalId[i] / total) * 100;
-            valorRedondeado = Math.round(porcentaje * potencia) / potencia;
-            porcentajes[i] = valorRedondeado;
+    // MÉTODO: ENCUENTRA EL VALOR MÁXIMO DE UNA FILA
+    // PARÁMETROS: 1 matriz int
+    public static int valorMaxFila(int[][] tabla,int fil) {
+    	
+        int valorMaximo = tabla[fil][0];
+        int maxFila = fil + 1;
+        for (int filas = 0; filas < maxFila; filas++) {
+        	
+            for (int columnas = 0; columnas < tabla[filas].length; columnas++) {
+            	
+                if (valorMaximo < tabla[filas][columnas]) {
+                    valorMaximo = tabla[filas][columnas];
+                }
+            }
         }
+        return valorMaximo;
+    }
+    // MÉTODO: ENCUENTRA EL VALOR MÍNIMO DE UNA FILA
+    // PARÁMETROS: 1 matriz int
+    public static int valorMinFila(int[][] tabla,int fil) {
+    	
+        int valorMinimo = tabla[fil][0];
+        int maxFila = fil + 1;
+        for (int filas = 0; filas < maxFila; filas++) {
+        	
+            for (int columnas = 0; columnas < tabla[filas].length; columnas++) {
+            	
+                if (valorMinimo > tabla[filas][columnas]) {
+                	valorMinimo = tabla[filas][columnas];
+                }
+            }
+        }
+        return valorMinimo;
+    }
+    
+    // MÉTODO: ENCUENTRA EL VALOR MÁXIMO DE UNA FILA
+    // PARÁMETROS: 1 matriz int
+    public static int valorMaxColumna(int[][] tabla,int col) {
+    	
+        int valorMaximo = tabla[0][col];
+        int maxCol = col + 1;
+        for (int filas = 0; filas < tabla.length; filas++) {
+        	
+            for (int columnas = col; columnas < maxCol; columnas++) {
+            	
+                if (valorMaximo < tabla[filas][columnas]) {
+                    valorMaximo = tabla[filas][columnas];
+                }
+            }
+        }
+        return valorMaximo;
+    }
+    
+    // MÉTODO: ENCUENTRA EL VALOR MÁXIMO DE UNA FILA
+    // PARÁMETROS: 1 matriz int
+    public static int valorMinColumna(int[][] tabla,int col) {
+    	
+        int valorMin = tabla[0][col];
+        int maxCol = col + 1;
+        for (int filas = 0; filas < tabla.length; filas++) {
+        	
+            for (int columnas = col; columnas < maxCol; columnas++) {
+            	
+                if (valorMin > tabla[filas][columnas]) {
+                	valorMin = tabla[filas][columnas];
+                }
+            }
+        }
+        return valorMin;
     }
 
     // ============================================

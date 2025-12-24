@@ -1,106 +1,228 @@
 package actividades.avanzadas;
+import java.util.Arrays;
+import java.util.Scanner;
 
 public class Act8 {
-	// ============================================
-	// DATOS FIJOS (NO CAMBIAN DURANTE EL PROGRAMA)
-	// ============================================
+    static Scanner scr = new Scanner(System.in);        //Scanner como variable de classe
+    
+    public static boolean cartasEntrada(String [] valores_cartas,String []palos_cartas) {
+    	
+    	//DECLARACION DE VARIABLE
+    	boolean verificador;
+    	int i;
+    	
+    	//INICIALIZAMOS VARIRABLES
+    	verificador = true;
+    	i = 0;
+    	
+        do {
+            
+            valores_cartas[i] = scr.next().toLowerCase();		//ESCRIBIMOS NUMERO
+            
+            if (valores_cartas[i].equals("0")) {
+            	verificador = false;
+            	break;
+			}
+            
+            if (verificador) {
+            palos_cartas[i] = scr.next().toLowerCase();			//ESCRIBIMOS VALOR CARTA	
+			}
+         
+             
+            i++;
+        } while (verificador);
+        
+        return verificador;
+        
+    }
+    //1º FUNCION QUE TRADUCE VALORES DEL USUARIO
+    public static int [] valoresAnumeros (String [] valores_cartas, int [] valores_numericos){
+    
+        // Switch para que vea todas las situaciones
+        for (int i = 0; i < valores_cartas.length; i++) {
 
-	// DÍAS DE LA SEMANA (5 días fijos)
-	String[] diasSemana = {"Lunes", "Martes", "Miércoles", "Jueves", "Viernes"};
+             switch(valores_cartas[i]) {
+                case "2": 
+                valores_numericos[i] = 2;
+                break;
+                case "3": 
+                valores_numericos[i] = 3;
+                break;
+                case "4": 
+                valores_numericos[i] = 4;
+                break;
+                case "5": 
+                valores_numericos[i] = 5;
+                break;
+                case "6": 
+                valores_numericos[i] = 6;
+                break;
+                case "7": 
+                valores_numericos[i] = 7;
+                break;
+                case "8": 
+                valores_numericos[i] = 8;
+                break;
+                case "9": 
+                valores_numericos[i] = 9;
+                break;
+                case "10": 
+                valores_numericos[i] = 10;
+                break;
+                case "j": 
+                valores_numericos[i] = 11;
+                break;
+                case "q": 
+                valores_numericos[i] = 12;
+                break;
+                case "k": 
+                valores_numericos[i] = 13;
+                break;
+                case "a": 
+                valores_numericos[i] = 14;
+                break;
+                
+             }
 
-	// HORARIOS (6 horas fijas)  
-	String[] horas = {"8:00-9:00", "9:00-10:00", "10:00-11:00", "11:00-12:00", "12:00-13:00", "13:00-14:00"};
 
-	// PROFESORES (8 profesores fijos)
-	String[] profesores = {
-	    "Prof. López",     // Código 1
-	    "Prof. Martínez",  // Código 2  
-	    "Prof. Rodríguez", // Código 3
-	    "Prof. Gómez",     // Código 4
-	    "Prof. Sánchez",   // Código 5
-	    "Prof. Pérez",     // Código 6
-	    "Prof. García",    // Código 7
-	    "Prof. Fernández"  // Código 8
-	};
+        }
 
-	// AULAS (4 aulas fijas - aunque en este ejercicio simplificado
-	// no diferenciamos entre aulas, todas son iguales)
-	String[] aulas = {"Aula 101", "Aula 102", "Aula 103", "Aula 104"};
+        return valores_numericos;
+  }
 
-	// ============================================
-	// DATOS DINÁMICOS (CAMBIAN DURANTE EJECUCIÓN)
-	// ============================================
+   //2º Funcion para saber si es una escalera de color o no
+  public static int numeroFalta (int [] valores_numerico){
+	  
+	  //ORDENAMOS EL ARRAY
+	  Arrays.sort(valores_numerico);
+	  int i;
+	  int numFalta;
+	  boolean salir; 
+	  boolean numConsecutivo;
+	  
+	  salir = false;
+	  numConsecutivo = true;
+	  i = 0;
+	  numFalta = 0;
+	  
+	  	do {
+	  		
+	  		
+	  		
+	  		if (valores_numerico[i + 1] - valores_numerico[i] != 1) {
+	  			
+	  			numConsecutivo = false;
+	  			
+	  			if (valores_numerico[i + 1] - valores_numerico[i] == 2) {	
+	  				numFalta = valores_numerico[i] + 1;						//VALOR SERA NUMERO CONSECUTIVO DE LA DIFERENCIA
+	  				salir = true;
+				} else {
+					
+					numFalta = 0;											//VALOR ES 0 PORQUE SI NO ES CONSCUTIVO DE 1 O 2 NO SE PUEDE HACER ESCALERA DE COLOR
+	  				salir = true;
+					
+				}
+	  			
+			}
+	  		
+	  		i++;
+			
+		} while (i < valores_numerico.length - 1|| !salir);	//Aumenta hasta la penultima posicion
+	  	
+	  	if (numConsecutivo) {
+	  		numFalta = valores_numerico[3] + 1;								//SI TODOS LOS VALORES SON CONSECUTIVOS EL NUMERO QUE FALTA ES EL VALOR CONSECUTIVO DEL ULTIMO
+		}
+	  	
+	  	return numFalta;
+	 
+  }
 
-	// MATRIZ PRINCIPAL: reservas[dia][hora]
-	// 5 días × 6 horas = 30 slots semanales
-	// VALOR: 0 = libre, 1-8 = código de profesor
-	int[][] reservas = new int[5][6];
+   // 3 FUNCION QUE RETORNA UN BOLLEAN DE IGUALES
 
-	// CONTADORES para estadísticas (opcional, se pueden calcular cuando se necesiten)
-	int[] horasPorProfesor = new int[8];  // Índice 0-7 para profesores 1-8
-	int[] ocupacionPorDia = new int[5];   // Índice 0-4 para días 0-4
+  public static boolean tipoCartas(String [] palos_cartas){
+    return palos_cartas[0].equals(palos_cartas[1]) && palos_cartas[2].equals(palos_cartas[3]);
+  }
 
-	// ============================================
-	// EJEMPLO DE INICIALIZACIÓN (datos de ejemplo)
-	// ============================================
+  
+    public static void main(String[] args) {
+    	
+    //DECLARACION DE VARIABLES
+    boolean salir;
+    int numeroFalta;   
+    boolean palosIguales;
+    boolean verificador;
+    String letraFalta;
+    
+    //INICIALIZAMOS 3 ARRAYS 2 PARA EL USUARIO Y UNO DE TRADUTOR
+    String [] valores_cartas = new String[4];   //ARRAY DE LOS VALORES DEL USUARIO
+    int [] valores_numericos = new int [4];     //VALORES  NUMERICOS DE LOS DATOS DE ENRADA
+    String [] palos_cartas = new String[4];     //ARRAY DE PALOS QUE EMPLEA LA SECUENCIA
 
-	void inicializarReservasEjemplo() {
-	    // Algunas reservas de ejemplo para empezar
-	    reservas[0][0] = 1; // Lunes 8:00 - Prof. López (código 1)
-	    reservas[0][2] = 4; // Lunes 10:00 - Prof. Gómez (código 4)
-	    reservas[0][4] = 6; // Lunes 12:00 - Prof. Pérez (código 6)
-	    
-	    reservas[1][1] = 2; // Martes 9:00 - Prof. Martínez (código 2)
-	    reservas[1][5] = 7; // Martes 13:00 - Prof. García (código 7)
-	    
-	    reservas[3][0] = 4; // Jueves 8:00 - Prof. Gómez (código 4)
-	    reservas[3][3] = 2; // Jueves 11:00 - Prof. Martínez (código 2)
-	    
-	    reservas[4][1] = 6; // Viernes 9:00 - Prof. Pérez (código 6)
-	    reservas[4][4] = 7; // Viernes 12:00 - Prof. García (código 7)
-	    
-	    // El resto de celdas quedan en 0 (libres)
+    
+    //INICIALIZAMOS VARIABLE
+    numeroFalta = 0;                        
+    palosIguales = false;   
+    letraFalta = "";                     
+    
+    salir = false;
+    do {
+
+    	verificador = cartasEntrada(valores_cartas, palos_cartas);
+    	
+    	if (!verificador) {
+			
+    		salir = true;
+    		
+		} else {
+
+        valores_numericos = valoresAnumeros(valores_cartas, valores_numericos); //TRADUCIMOS VALORES
+
+        numeroFalta = numeroFalta(valores_numericos);
+
+        if (numeroFalta > 10) {
+        switch (numeroFalta) {
+            case 11:
+                letraFalta = "J";
+                break;
+            case 12:
+                letraFalta = "Q";
+                break;
+            case 13:
+                letraFalta = "K";
+                break;
+            case 14: 
+                letraFalta = "A";
+                break;
+            default:
+                break;
+        }
+    }
+
+        palosIguales = tipoCartas(palos_cartas);    //Comparamos los distintos tipos
+
+
+        if (!palosIguales) {
+        	
+        System.out.println("NADA");     
+        
+        } else if(numeroFalta == 0){
+        	
+        System.out.println("NADA");  
+        
+        } else if (numeroFalta > 10){
+        	
+        System.out.println(letraFalta.toUpperCase() + " " + palos_cartas[0].toUpperCase());
+        
+         } else {
+        System.out.println(numeroFalta + " " + palos_cartas[0].toUpperCase());
+        }
+     
 	}
+        
+    } while (!salir);
+    
+    
+    
 
-	// ============================================
-	// FUNCIÓN PARA MOSTRAR TABLA (ejemplo)
-	// ============================================
-
-	void mostrarTablaReservas() {
-	    System.out.println("\nRESERVAS DE AULAS - SEMANA ACTUAL");
-	    System.out.println("═══════════════════════════════════════════════");
-	    
-	    // Encabezado de horas
-	    System.out.print("        ");
-	    for (String hora : horas) {
-	        System.out.printf("%-7s", hora.substring(0, 5)); // Muestra solo "8:00-"
-	    }
-	    System.out.println();
-	    
-	    // Filas para cada día
-	    for (int dia = 0; dia < 5; dia++) {
-	        System.out.printf("%-8s", diasSemana[dia]);
-	        
-	        for (int hora = 0; hora < 6; hora++) {
-	            int codigoProf = reservas[dia][hora];
-	            if (codigoProf == 0) {
-	                System.out.print("Libre  ");
-	            } else {
-	                // Mostrar apellido del profesor (primera palabra después de "Prof. ")
-	                String nombreCompleto = profesores[codigoProf - 1];
-	                String apellido = nombreCompleto.substring(6); // Quita "Prof. "
-	                System.out.printf("%-7s", apellido);
-	            }
-	        }
-	        System.out.println();
-	    }
-	    
-	    System.out.println("═══════════════════════════════════════════════");
-	    System.out.println("Leyenda: Apellido = Aula reservada por ese profesor");
-	}
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
-
+    }
 }

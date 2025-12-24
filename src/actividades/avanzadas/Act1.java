@@ -14,7 +14,7 @@ public class Act1 {
 		// Inicializamos la matriz de 3x3
 		int[][] tabla = new int[3][3];
 
-		MetodosMatriceslib.llenarMatrizRandom(tabla, 10); // Imprimimos un metodo que llena el array automaticamente con
+		MetodosMatriceslib.llenarMatrizRandom(tabla, 10,0,0); // Imprimimos un metodo que llena el array automaticamente con
 		// numeros random de 0 a 9
 		MetodosMatriceslib.mostrarMatriz(tabla); // Mostramos matriz con otro metodo
 

@@ -24,6 +24,7 @@ public class Act6 {
 			if (numEquipos < 5) {
 				System.out.println("\n[ERROR]: El análisis requiere un mínimo de 5 equipos.");
 				System.out.println();
+				
 			} else if (numEquipos > 20) {
 				System.out.println("\n[ERROR]: LALIGA EA SPORTS solo cuenta con 20 equipos.");
 				System.out.println();

@@ -224,9 +224,7 @@ public class Act4 {
 			promediosMaterias(classe, promediosMaterias, filas); // CALCULAMOS PROMEDIOS MATERIAS
 
 			// MOSTRAMOS LA MATRIZ
-			System.out.println("ID Materias");
-			MetodosMatriceslib.mostrarMatriz(classe);
-			System.out.println();
+			MetodosMatriceslib.mostrarTablaPrefijos(classe, "Estudiante", "MT","E.RIGOBERT");
 
 			// Mostramos la cantidad de alumnos y materias
 			System.out.println("Cantidad de Alumnos: " + filas);

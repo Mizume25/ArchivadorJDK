@@ -31,7 +31,7 @@ public class Act3 {
         
         int numeroRandom = MetodosEntradaslib.numeroUsuario("Hasta que numero random imprimimos [ej 9 => Nº 0 - 8 ]: ");
 
-        MetodosMatriceslib.llenarMatrizRandom(tabla, numeroRandom); // Llamamos al metodo con un rango de randoms
+        MetodosMatriceslib.llenarMatrizRandom(tabla, numeroRandom,0,0); // Llamamos al metodo con un rango de randoms
 
         do {
             

@@ -25,4 +25,40 @@ public class MetodosEntradaslib {
         System.out.println(texto);
         return sc.next();
     }
+    
+    // ============================================
+    // SECCIÓN 2: METODO DE DATOS DE ENTRADA CON ESTRUCTURA DE MAXIMO Y MINIMO
+    // ============================================
+    
+    public static int numUsuario (String titulo,String enunciado, String EnunciadoMaximo,String EnunciadoMinimo,int numMaximo, int numMinimo) {
+		
+    		int numUsuario = numMinimo;
+    	
+		do {
+			
+			//PEDIMOS NUM USUARIO
+			
+
+			//ESUTRUCTURA DE CONTROL DE MINIMO
+			if (numUsuario < numMinimo) {
+				System.out.println(EnunciadoMinimo);
+				System.out.println();
+			
+			//ESTRUCTURA DE CONTROL DE MAXIMOS
+			} else if (numUsuario > numMaximo) {
+				System.out.println(EnunciadoMaximo);
+				System.out.println();
+			}
+			
+			
+			System.out.println(titulo);
+			System.out.println(enunciado);
+			numUsuario = sc.nextInt();
+
+		} while (numUsuario < numMinimo || numUsuario > numMaximo);
+		
+		return numUsuario;
+		
+	}
+    
 }

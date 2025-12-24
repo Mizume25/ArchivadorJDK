@@ -27,9 +27,9 @@ public class Act2 {
 
         int sumaTotal = MetodosMatriceslib.sumaTotalMatriz(tabla);    // Sumamos el total con el metodos sumaTotalMatriz
 
-        MetodosMatriceslib.sumaFilasMatriz(sumaFilas, tabla);     //Sumamos las filas con el metodo SumamosFilasMatriz
+        MetodosMatriceslib.sumaFilasMatriz(sumaFilas, tabla,0);     //Sumamos las filas con el metodo SumamosFilasMatriz
 
-        MetodosMatriceslib.sumaColumnasMatriz(sumaColumnas, tabla, 3);    //Sumamos las columnas con el metodo sumaColumnaMtriz
+        MetodosMatriceslib.sumaColumnasMatriz(sumaColumnas, tabla, 0,3);    //Sumamos las columnas con el metodo sumaColumnaMtriz
 
         // Mostrar resultados
         MetodosMatriceslib.mostrarMatriz(tabla);

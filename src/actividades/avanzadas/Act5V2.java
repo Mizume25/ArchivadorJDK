@@ -109,15 +109,15 @@ public class Act5V2 {
 		MetodosMatriceslib.idsAutoIncrementadas(empresa);
 
 		// Llenamos de valores de beneficios de cada categoria x sucursal
-		MetodosMatriceslib.llenarValorIdsRandom(empresa);
+		MetodosMatriceslib.llenarMatrizRandom(empresa, 25,0,1);
 
 		// El array sea tan grande como fila de sucursales haya
 		int[] totalBeneficioSucursal = new int[filas];
 		int[] totalBeneficioCategoria = new int[columnas - 1];
 
 		// CALCULAMOS TOTALES POR SUCURSAL Y CATEGORIA
-		MetodosMatriceslib.sumaTotalIdsFilas(empresa, totalBeneficioSucursal);
-		MetodosMatriceslib.sumaTotalIdsColumnas(empresa, totalBeneficioCategoria);
+		MetodosMatriceslib.sumaFilasMatriz(totalBeneficioSucursal,empresa,1);
+		MetodosMatriceslib.sumaColumnasMatriz(totalBeneficioCategoria,empresa,1,(columnas - 1));
 
 		// Calculamos las posiciones mas altas de cada array de valores totales
 		int indexSucursal = MetodosArrayslib.maxValorArray(totalBeneficioSucursal);

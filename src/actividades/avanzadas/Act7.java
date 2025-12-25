@@ -1,7 +1,7 @@
 package actividades.avanzadas;
 //ARCHIVO DE PRUEBA PARA AFINAR RECICLADO DE METODOS
-import arrays.MetodosArrayslib;
-import matrices.MetodosMatriceslib;
+
+
 
 public class Act7 {
 

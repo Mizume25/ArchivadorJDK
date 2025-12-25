@@ -1,5 +1,7 @@
 package actividades.basico;
 
+
+
 public class Act1 {
 
 	public static void main(String[] args) {
@@ -14,7 +16,7 @@ public class Act1 {
 		boolean comprobador;			// TRUE O FALSE
 		long grande;					//CADENA DE NUMEROS ENORME
 		var cadena = "Hola a todos";;	//CADENA DE CARACTERES
-		
+		String multilinea;
 		
 		
 		//INICIALIZACION DE VARIABLES
@@ -24,7 +26,8 @@ public class Act1 {
 		decP = 14;
 		comprobador = true;
 		grande = 2343523532525235L;
-		
+		multilinea = "'Declaracion de multiples lineas de texto en bloque String "
+				+ "Declaracion de multiples linea de texto en bloque '";
 		
 		//IMPRIMIR VALORES
 		System.out.println(msg + numero + decimal + decP + comprobador + grande + cadena);
@@ -44,10 +47,14 @@ public class Act1 {
 		
 		final int numero2 = 6;
 		System.out.println(numero2);
+		System.out.println(multilinea);
 		
+		String mensaje = String.format("Hola me llamo %s y estoy encantado de conocerte", "Gabriel");
 		
+		System.out.println(mensaje);
 		
-		
+		String ejemplo = "H O L A";
+		System.out.println(ejemplo.isEmpty());
 
 		
 		

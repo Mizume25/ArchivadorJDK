@@ -48,7 +48,8 @@ public class Act6 {
 		System.out.println(cadena);
 		System.out.println();
 		System.out.println(cadenaInversa);
-
+		
+		
 	}
 
 }

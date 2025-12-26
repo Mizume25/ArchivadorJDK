@@ -16,7 +16,6 @@ public class Act3 {
         int columnas;
         int suma;
         int sumaMatriz;
-        var x = "Hola";
         suma = 0;
         MetodosArrayslib.llenarArrayRandom(array, 5);
         
@@ -41,6 +40,7 @@ public class Act3 {
         suma = MetodosArrayslib.sumaValorTotalArray(array);
         System.out.println("\nSuma total es: " + suma);
         
+        //OBTENER FILAS Y COLUMNAS
         filas = MetodosEntradaslib.numeroUsuario("Filas: ");
         columnas = MetodosEntradaslib.numeroUsuario("Columnas: ");
         int [][] tabla = new int[filas][columnas];

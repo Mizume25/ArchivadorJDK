@@ -34,7 +34,7 @@ public class Act8 {
 					+ "\n 2. Debe contener al menos 1 Mayuscula y Minuscula"
 					+ "\n 3. Debe contener al menos un caracter raro: * _ @ %"
 					+ "\n 4. Debe contener 1 numero"
-					+ "\nIntroduce tu contraseña: ");
+					+ "\nIntroduce tu contraseña:");
 			return sc.nextLine();
 			
 	}
@@ -397,9 +397,7 @@ public class Act8 {
 		int i;
 		int contador;
 		char[] caracteres;
-		char [] usuario;
-		int rep1;
-		int rep2;
+		
 
 		// INICIALIZAMOS
 		// INICIALIAMOS VARIABLES
@@ -436,31 +434,146 @@ public class Act8 {
 	}
 	
 	
+	// 8º FUNCION QUE COMRPEUBA SI HAY CARACTERES EN CONTRASEÑA
+	public static boolean medidaContra(String password) {
+		// DECLARAMOS VARIABLES
+		int longitud;
+
+		// INICIALIZAMOS VARIABLES
+		longitud = password.length();
+
+		// ESTURCTURA QUE COMPRUEBA TAMAÑO
+		if (longitud >= 8 && longitud <= 20) {
+			return true;
+
+		} else {
+
+			return false;
+		}
+
+	}
+
+	// 9º FUNCION QUE COMRPEUBA SI HAY MAYUSCULAS EN CONTRASEÑA
+	public static boolean buscarMayusculaContra(String password) {
+		// DECLARAMOS VARIABLE
+		boolean encontrado;
+		int longitud;
+		int i;
+
+		// INICIALIZAMOS
+		longitud = password.length();
+		encontrado = false;
+		i = 0;
+		// RECORREMOS TODA LA CADENA
+		do {
+
+			encontrado = Character.isUpperCase(password.charAt(i));
+
+			i++;
+		} while (!encontrado && i < longitud - 1);
+
+		return encontrado;
+
+	}
+
+	// 10º FUNCION QUE COMRPEUBA SI HAY MINUSCULAS EN CONTRASEÑA
+	public static boolean buscarMinusculaContra(String password) {
+		// DECLARAMOS VARIABLE
+		boolean encontrado;
+		int longitud;
+		int i;
+
+		// INICIALIZAMOS
+		longitud = password.length();
+		encontrado = false;
+		i = 0;
+		// RECORREMOS TODA LA CADENA
+		do {
+
+			encontrado = Character.isLowerCase(password.charAt(i));
+
+			i++;
+		} while (!encontrado && i < longitud - 1);
+
+		return encontrado;
+
+	}
+
+	// 11º FUNCION QUE COMRPEUBA SI HAY CARACTERES RAROS EN CONTRASEÑA
+	public static boolean buscarCaracterEspecial(String password) {
+		// DECLARAMOS VARIABLE
+		boolean encontrado;
+		int longitud;
+		int i;
+
+		// INICIALIZAMOS
+		longitud = password.length();
+		encontrado = false;
+		i = 0;
+		// RECORREMOS TODA LA CADENA
+		do {
+
+			if (password.charAt(i) == '%' || password.charAt(i) == '$' || password.charAt(i) == '_'
+					|| password.charAt(i) == '*') {
+
+				encontrado = true;
+			}
+
+			i++;
+		} while (!encontrado && i < longitud - 1);
+
+		return encontrado;
+
+	}
+
+	// 12º FUNCION QUE COMRPEUBA SI HAY DIGITOS RAROS EN CONTRASEÑA
+	public static boolean buscarDigitoContra(String password) {
+		// DECLARAMOS VARIABLE
+		boolean encontrado;
+		int longitud;
+		int i;
+
+		// INICIALIZAMOS
+		longitud = password.length();
+		encontrado = false;
+		i = 0;
+		// RECORREMOS TODA LA CADENA
+		do {
+
+			encontrado = Character.isDigit(password.charAt(i));
+
+			i++;
+		} while (!encontrado && i < longitud - 1);
+
+		return encontrado;
+
+	}
 	
 	public static void main(String[] args) {
         //DECLARAMOS VARIABLES
 		int fil;
 		String [][] tabla;
 		String correo;
-		String contra;
+		String password;
 		int i;
 		int fila;
 		//VARIABLES DE COMPROBACION
 		//VALIDACION INICIAL
 		boolean basicCheck;
 		
-		//COMPROBACIONES FINALES
+		//COMPROBACIONES DE CORREO
 		boolean medidaCorreo;
 		boolean dominio;
 		boolean extension;
 		boolean mayusculas;
 		boolean minusculas;
 		boolean digitos;
+		
+		//COMPROBACIONES DE CONTRASEÑA
+		
 		boolean [] correoValido;
 		int [] traductorBooleans;
-		boolean validacionCompleta;
-		boolean correoRepetido;
-		
+		int [] traductorBooleansContra;
 		
 		//INICIALIZAMOS VARIRABLES
 			//LLAMAMOS AL METODO DE ESTRUCTURA DE CONTROL PARA QUE ME DE ENTRE UN NUMERO DE 2 A 5
@@ -473,9 +586,11 @@ public class Act8 {
 		digitos = false;
 		correoValido = new boolean [6];
 		traductorBooleans = new int [6];
+		
 		basicCheck = true;
 		i = 0;
 		fila = 0;
+		
 		do {
 			
 			correo = escribirCorreo();
@@ -605,9 +720,125 @@ public class Act8 {
 		} while (fila < fil);
 		
 		
+		//COMPROBACIONES DE CORREO
+		boolean medidaContra;
+		boolean mayusculasContra;
+		boolean minusculasContra;
+		boolean digitosContra;
+		boolean caracteresRaroContra;
+		boolean [] contraValida = new boolean [5];
+		traductorBooleansContra = new int [5];
+		fila = 0;
+		do {
+			
+			
+			password = escribirContra(correo);
+			
+			//COMPROBACIONES INICIALES QUE NO CONTENGA ESPACIOS EN BLANCO, QUE CONTENGA 1 ARROBA DE MONIO Y UN PUNTO DE EXTENSION
+			// 1. ESPACIOS
+			if (password.contains(" ")) {
+			    System.out.println("\nERROR: Tu contraseña no puede contener espacios vacios");
+			    basicCheck = false;
+			}
+			
+			if (basicCheck) {
+				boolean error;
+				i = 0; //reiniciamos i
+				//COMPROBAMOS MEDIDA DEL CONTRA
+				medidaContra = medidaContra(password);		//COMPROBAMOS
+				contraValida[i] = medidaContra;				//GUARDAMOS EN EL ARRAY DE BOOLEANS
+				i++;										// INCREMENTAMOS i
+				
+				//COMPROBAMOS MAYUSCULAS
+				mayusculasContra = buscarMayusculaContra(password);
+				contraValida[i] = mayusculasContra;	
+				i++;
+				
+				//COMPROBAMOS MINUSCULAS
+				minusculasContra = buscarMinusculaContra(password);
+				contraValida[i] = minusculasContra;	
+				i++;
+				
+				//COMPROBAMOS MAYUSCULAS
+				caracteresRaroContra = buscarCaracterEspecial(correo);
+				contraValida[i] = caracteresRaroContra;	
+				i++;
+				
+				//COMPROBAMOS MINUSCULAS
+				digitosContra = buscarDigitoContra(correo);
+				contraValida[i] = digitosContra;	
+				i++;
+				
+				
+				//TRADUCIMOS EL ARRAY DE BOOLEANS A INTS DE 1 A 0
+				for (int j = 0; j < contraValida.length; j++) {
+					
+					if (contraValida[j]) {
+						traductorBooleansContra[j] = 1;
+					} else {
+						traductorBooleansContra[j] = 0;
+					}
+				}
+				
+				error = MetodosArrayslib.buscarCoincidenciaArray(traductorBooleans, 0);
+				
+				if (error) {
+				
+				int k = 0;
+				int posicion = 0;
+				boolean secuencia = false;
+				
+				while (!secuencia) {
+
+		            if (traductorBooleansContra[k] == 0) {
+		            	posicion = k;
+		            	secuencia = true;
+		            }
+		            k++;
+		        }
+				
+			
+					
+					switch (posicion) {
+					case 0:
+		                System.out.println("Error: Longitud incorrecta (8-20 caracteres)");
+		                break;
+		            case 1:
+		                System.out.println("Error: Falta Mayuscula");
+		                break;
+		            case 2:
+		                System.out.println("Error: Falta Minuscula");
+		                break;
+		            case 3:
+		                System.out.println("Error: Falta caracter especial *_%$");
+		                break;
+		            case 4:
+		                System.out.println("Error: Falta digitos");
+		                break;
+						}
+				
+				
+				} else {
+					
+					tabla[fila][1] = password;
+					fila++;
+					System.out.println("\nTu contraseña se ha guardado perfectamente!");
+					
+					
+				}
+				
+				
+				
+			} else {
+				
+				System.out.println("\nTu contraseña no contiene caracteristicas basicas");
+			}
+			
+			
+			
 		
 		
-		contra = escribirContra(correo);
+		} while (fila < fil);
 		
   }
 }

@@ -397,6 +397,9 @@ public class Act8 {
 		int i;
 		int contador;
 		char[] caracteres;
+		char [] usuario;
+		int rep1;
+		int rep2;
 
 		// INICIALIZAMOS
 		// INICIALIAMOS VARIABLES
@@ -432,54 +435,7 @@ public class Act8 {
 		return encontrado;
 	}
 	
-	public static boolean correoRepetido(String correo,String [][] tabla,int fila) {
-		// DECLARAMOS VARIABLES
-		int longitud;
-		int i;
-		char[] caracteres;
-		char[] nombreCorreo; 
-		int contador;
-		boolean repetido;
-		// INICIALIAMOS VARIABLES
-		longitud = correo.length(); // MEDIRA TANTO MIDA EL CORREO
-		i = 0;
-		contador = 0;
-		caracteres = new char[longitud];
-
-		// LLENAMOS EL ARRAY DE CADENA DE CARACTERES DEL CORREO
-		for (int j = 0; j < longitud; j++) {
-			caracteres[j] = correo.charAt(j);
-		}
-
-		// DICTAMINAMOS TAMAÑOS
-		while (caracteres[i] != '@') {
-
-			// SI EL CARACTER ACTUAL NO ES "@" NO TERMINA EL BUCLE
-			contador++; // INCREMENTAMOS CARACTER NO "@"
-			i++; // INCREMENTAMOS I HASTA QUE ENCUENTRA LA POSICION DE @
-
-		}
-		
-		nombreCorreo = new char [contador];
-		
-		
-		for (int j = 0; j < contador; j++) {
-			nombreCorreo[j] = correo.charAt(j);
-		}
-		
-		
-		
-		repetido = true;
-		for (int j = 0; j < nombreCorreo.length; j++) {
-			if (nombreCorreo[j] != tabla[fila - 1][0].charAt(j)) {
-				repetido = false;
-			}
-		}
-		
-		return repetido;
-		
-		
-	}
+	
 	
 	public static void main(String[] args) {
         //DECLARAMOS VARIABLES
@@ -628,27 +584,10 @@ public class Act8 {
 				
 				} else {
 					
-					//Mas de una iteracion
-					if (fila > 0) {
-						
-						correoRepetido = correoRepetido(correo, tabla, fila);
-						
-						if (!correoRepetido) {
-							tabla[fila][0] = correo;
-							fila++;
-							System.out.println("\nTu correo se ha guardado perfectamente!");
-						} else {
-							
-							System.out.println("\n EL correo esta repetido");
-						}
-					}
-					
-					//Primera iteracion
-					if (fila == 0) {
 					tabla[fila][0] = correo;
 					fila++;
 					System.out.println("\nTu correo se ha guardado perfectamente!");
-					}
+					
 					
 				}
 				
@@ -664,6 +603,9 @@ public class Act8 {
 		
 		
 		} while (fila < fil);
+		
+		
+		
 		
 		contra = escribirContra(correo);
 		

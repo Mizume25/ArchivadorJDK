@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import arrays.MetodosArrayslib;
 import datosentrada.MetodosEntradaslib;
+import matrices.MetodosMatriceslib;
 
 //Verificacion de correo electronico y contraseña
 public class Act8 {
@@ -27,8 +28,7 @@ public class Act8 {
 	}
 	
 	//2º FUNCION QUE ESCRIBE UNA CONTRASEÑA COMPLETO
-		public static String escribirContra (String correo) {
-			System.out.println(correo);
+		public static String escribirContra () {
 			System.out.println("\nEscribe una contraseña que cumpla estos equisitos"
 					+ "\n 1. Debe medir entre 8 a 20 caracteres"
 					+ "\n 2. Debe contener al menos 1 Mayuscula y Minuscula"
@@ -470,7 +470,7 @@ public class Act8 {
 			encontrado = Character.isUpperCase(password.charAt(i));
 
 			i++;
-		} while (!encontrado && i < longitud - 1);
+		} while (!encontrado && i < longitud);
 
 		return encontrado;
 
@@ -520,7 +520,7 @@ public class Act8 {
 			}
 
 			i++;
-		} while (!encontrado && i < longitud - 1);
+		} while (!encontrado && i < longitud);
 
 		return encontrado;
 
@@ -543,302 +543,310 @@ public class Act8 {
 			encontrado = Character.isDigit(password.charAt(i));
 
 			i++;
-		} while (!encontrado && i < longitud - 1);
+		} while (!encontrado && i < longitud);
 
 		return encontrado;
 
 	}
 	
-	public static void main(String[] args) {
-        //DECLARAMOS VARIABLES
-		int fil;
-		String [][] tabla;
+	//13º FUNCION QUE CALCULA SI LOS VALORES DE UN CORREO ESTAN REPETIDOS
+	public static void correoRepetido(String [][] tabla, int [] repetido) {
+		//COMRPBACIONES POSTERIORES
+				int j = 0; //Fila completa
+				int k; // Fila Iterna
+				int y = 0;
+				
+				
+				while (j < tabla.length) {
+				    k = j + 1;  // Comparamos con los siguientes elementos
+				    
+				    while (k < tabla.length) {
+				        // Comparar el elemento [j][0] con [k][0]
+				        if (tabla[j][0].equals(tabla[k][0])) {
+				            repetido[y] = j;      // Guardar índice del primer repetido
+				            repetido[y + 1] = k;  // Guardar índice del segundo repetido
+				            y += 2; 			 // IMPORTANTE: Incrementar y para no sobrescribir
+				        }
+				        
+				        k++;
+				    }
+				    
+				    j++;
+				}
+	}
+	
+	public static void procesarCorreo(String[][] tabla,int fil) {
+
 		String correo;
-		String password;
-		int i;
-		int fila;
-		//VARIABLES DE COMPROBACION
-		//VALIDACION INICIAL
-		boolean basicCheck;
-		
-		//COMPROBACIONES DE CORREO
-		boolean medidaCorreo;
-		boolean dominio;
-		boolean extension;
-		boolean mayusculas;
-		boolean minusculas;
-		boolean digitos;
-		
-		//COMPROBACIONES DE CONTRASEÑA
-		
-		boolean [] correoValido;
-		int [] traductorBooleans;
-		int [] traductorBooleansContra;
-		
-		//INICIALIZAMOS VARIRABLES
-			//LLAMAMOS AL METODO DE ESTRUCTURA DE CONTROL PARA QUE ME DE ENTRE UN NUMERO DE 2 A 5
-		fil = MetodosEntradaslib.numUsuario("==Gestor de correos==", "\nIntroduce cantidad de correos que te gustari introducir:",
-		"\nMaximo puedes introducir 5", "\nMinimo necesitas introducir 2 correos", 5, 2);
-		
-		tabla = new String [fil][2];			//INDEPENDIENTEMENTE DE SI HAY 5 O 2 CORREO SIEMPRE HBARA 1 COLUMNA
-		mayusculas = false;
-		minusculas = false;
-		digitos = false;
-		correoValido = new boolean [6];
-		traductorBooleans = new int [6];
-		
-		basicCheck = true;
-		i = 0;
-		fila = 0;
-		
+		boolean medidaCorreo, dominio, extension, mayusculas, minusculas, digitos;
+		boolean [] correoValido = new boolean [6];
+		int [] traductorBooleans = new int [6];
+		int i = 0;
+		int fila = 0;
+		boolean basicCheck = true;
+
 		do {
-			
 			correo = escribirCorreo();
-			
-			//COMPROBACIONES INICIALES QUE NO CONTENGA ESPACIOS EN BLANCO, QUE CONTENGA 1 ARROBA DE MONIO Y UN PUNTO DE EXTENSION
+			basicCheck = true; // Reiniciar para cada intento
+
+			//COMPROBACIONES INICIALES QUE NO CONTENGA ESPACIOS EN BLANCO, QUE CONTENGA 1 ARROBA Y UN PUNTO
 			// 1. ESPACIOS
 			if (correo.contains(" ")) {
-			    System.out.println("\nERROR: Tu correo no puede contener espacios vacios");
-			    basicCheck = false;
+				System.out.println("\nERROR: Tu correo no puede contener espacios vacios");
+				basicCheck = false;
 			}
 
 			// 2. ARROBA (@)
-			if (!correo.contains("@")) {  
-			    System.out.println("\nERROR: Tu correo debe contener @ (ej: @gmail.com)");
-			    basicCheck = false;
+			if (!correo.contains("@")) {
+				System.out.println("\nERROR: Tu correo debe contener @ (ej: @gmail.com)");
+				basicCheck = false;
 			}
 
 			// 3. PUNTO (.)
-			if (!correo.contains(".")) {  
-			    System.out.println("\nERROR: Tu correo debe contener punto (ej: .com)");
-			    basicCheck = false;
+			if (!correo.contains(".")) {
+				System.out.println("\nERROR: Tu correo debe contener punto (ej: .com)");
+				basicCheck = false;
 			}
-			
+
 			if (basicCheck) {
 				boolean error;
-				i = 0; //reiniciamos i
+				i = 0; // reiniciamos i
+
 				//COMPROBAMOS MEDIDA DEL CORREO
-				medidaCorreo = medidaCorreo(correo);		//COMPROBAMOS
-				correoValido[i] = medidaCorreo;				//GUARDAMOS EN EL ARRAY DE BOOLEANS
-				i++;										// INCREMENTAMOS i
-				
-				//COMPROBAMOS MEDIDA DEL CORREO
+				medidaCorreo = medidaCorreo(correo); // COMPROBAMOS
+				correoValido[i] = medidaCorreo; // GUARDAMOS EN EL ARRAY DE BOOLEANS
+				i++; // INCREMENTAMOS i
+
+				//COMPROBAMOS DOMINIO DEL CORREO
 				dominio = dominioCorreo(correo);
-				correoValido[i] = dominio;	
+				correoValido[i] = dominio;
 				i++;
-				
+
 				//COMPROBAMOS EXTENSION
 				extension = extensionCorreo(correo);
-				correoValido[i] = extension;	
+				correoValido[i] = extension;
 				i++;
-				
+
 				//COMPROBAMOS MAYUSCULAS
 				mayusculas = buscarMayusculaCorreo(correo);
-				correoValido[i] = mayusculas;	
+				correoValido[i] = mayusculas;
 				i++;
-				
+
 				//COMPROBAMOS MINUSCULAS
 				minusculas = buscarMinusculaCorreo(correo);
-				correoValido[i] = minusculas;	
+				correoValido[i] = minusculas;
 				i++;
-				
+
 				//COMPROBAMOS DIGITOS
 				digitos = buscarDigitoCorreo(correo);
 				correoValido[i] = digitos;
-				
+
 				//TRADUCIMOS EL ARRAY DE BOOLEANS A INTS DE 1 A 0
 				for (int j = 0; j < correoValido.length; j++) {
-					
 					if (correoValido[j]) {
 						traductorBooleans[j] = 1;
 					} else {
 						traductorBooleans[j] = 0;
 					}
 				}
-				
-				error = MetodosArrayslib.buscarCoincidenciaArray(traductorBooleans, 0);
-				
-				if (error) {
-				
-				int k = 0;
-				int posicion = 0;
-				boolean secuencia = false;
-				
-				while (!secuencia) {
 
-		            if (traductorBooleans[k] == 0) {
-		            	posicion = k;
-		            	secuencia = true;
-		            }
-		            k++;
-		        }
-				
-			
-					
+				error = MetodosArrayslib.buscarCoincidenciaArray(traductorBooleans, 0);
+
+				if (error) {
+					int k = 0;
+					int posicion = 0;
+					boolean secuencia = false;
+
+					while (!secuencia && k < traductorBooleans.length) {
+						if (traductorBooleans[k] == 0) {
+							posicion = k;
+							secuencia = true;
+						}
+						k++;
+					}
+
 					switch (posicion) {
 					case 0:
-		                System.out.println("Error: Longitud incorrecta (10-40 caracteres)");
-		                break;
-		            case 1:
-		                System.out.println("Error: Dominio no válido");
-		                break;
-		            case 2:
-		                System.out.println("Error: Extensión no válida");
-		                break;
-		            case 3:
-		                System.out.println("Error: Falta mayúscula");
-		                break;
-		            case 4:
-		                System.out.println("Error: Falta minúscula");
-		                break;
-		            case 5:
-		                System.out.println("Error: Falta dígito");
-		                break;
-						}
-				
-				
+						System.out.println("Error: Longitud incorrecta (10-40 caracteres)");
+						break;
+					case 1:
+						System.out.println("Error: Dominio no válido");
+						break;
+					case 2:
+						System.out.println("Error: Extensión no válida");
+						break;
+					case 3:
+						System.out.println("Error: Falta mayúscula");
+						break;
+					case 4:
+						System.out.println("Error: Falta minúscula");
+						break;
+					case 5:
+						System.out.println("Error: Falta dígito");
+						break;
+					}
 				} else {
-					
 					tabla[fila][0] = correo;
 					fila++;
 					System.out.println("\nTu correo se ha guardado perfectamente!");
-					
-					
 				}
-				
-				
-				
 			} else {
-				
-				System.out.println("\nTu correo no contiene caracteristicas basicas");
+				System.out.println("\nTu correo no contiene características básicas");
 			}
-			
-			
-			
-		
-		
+
 		} while (fila < fil);
-		
-		
-		//COMPROBACIONES DE CORREO
-		boolean medidaContra;
-		boolean mayusculasContra;
-		boolean minusculasContra;
-		boolean digitosContra;
-		boolean caracteresRaroContra;
+	}
+	
+	public static void procesarContrasenas(String[][] tabla,int fil) {
+
+		String password;
+		boolean medidaContra, mayusculasContra, minusculasContra, digitosContra, caracteresRaroContra;
 		boolean [] contraValida = new boolean [5];
-		traductorBooleansContra = new int [5];
-		fila = 0;
+		int [] traductorBooleansContra = new int [5];
+		int fila = 0;
+		int i = 0;
+		boolean basicCheck = true;
 		do {
-			
-			
-			password = escribirContra(correo);
-			
-			//COMPROBACIONES INICIALES QUE NO CONTENGA ESPACIOS EN BLANCO, QUE CONTENGA 1 ARROBA DE MONIO Y UN PUNTO DE EXTENSION
+			password = escribirContra();
+			basicCheck = true; // Reiniciar para cada intento
+
+			//COMPROBACIONES INICIALES
 			// 1. ESPACIOS
 			if (password.contains(" ")) {
-			    System.out.println("\nERROR: Tu contraseña no puede contener espacios vacios");
-			    basicCheck = false;
+				System.out.println("\nERROR: Tu contraseña no puede contener espacios vacíos");
+				basicCheck = false;
 			}
-			
+
 			if (basicCheck) {
 				boolean error;
-				i = 0; //reiniciamos i
-				//COMPROBAMOS MEDIDA DEL CONTRA
-				medidaContra = medidaContra(password);		//COMPROBAMOS
-				contraValida[i] = medidaContra;				//GUARDAMOS EN EL ARRAY DE BOOLEANS
-				i++;										// INCREMENTAMOS i
-				
-				//COMPROBAMOS MAYUSCULAS
+				i = 0; // reiniciamos i
+
+				//COMPROBAMOS MEDIDA DE LA CONTRASEÑA
+				medidaContra = medidaContra(password);
+				contraValida[i] = medidaContra;
+				i++;
+
+				//COMPROBAMOS MAYÚSCULAS
 				mayusculasContra = buscarMayusculaContra(password);
-				contraValida[i] = mayusculasContra;	
+				contraValida[i] = mayusculasContra;
 				i++;
-				
-				//COMPROBAMOS MINUSCULAS
+
+				//COMPROBAMOS MINÚSCULAS
 				minusculasContra = buscarMinusculaContra(password);
-				contraValida[i] = minusculasContra;	
+				contraValida[i] = minusculasContra;
 				i++;
-				
-				//COMPROBAMOS MAYUSCULAS
-				caracteresRaroContra = buscarCaracterEspecial(correo);
-				contraValida[i] = caracteresRaroContra;	
+
+				//COMPROBAMOS CARACTERES ESPECIALES
+				caracteresRaroContra = buscarCaracterEspecial(password);
+				contraValida[i] = caracteresRaroContra;
 				i++;
-				
-				//COMPROBAMOS MINUSCULAS
-				digitosContra = buscarDigitoContra(correo);
-				contraValida[i] = digitosContra;	
+
+				//COMPROBAMOS DÍGITOS
+				digitosContra = buscarDigitoContra(password);
+				contraValida[i] = digitosContra;
 				i++;
-				
-				
+
 				//TRADUCIMOS EL ARRAY DE BOOLEANS A INTS DE 1 A 0
 				for (int j = 0; j < contraValida.length; j++) {
-					
 					if (contraValida[j]) {
 						traductorBooleansContra[j] = 1;
 					} else {
 						traductorBooleansContra[j] = 0;
 					}
 				}
-				
-				error = MetodosArrayslib.buscarCoincidenciaArray(traductorBooleans, 0);
-				
-				if (error) {
-				
-				int k = 0;
-				int posicion = 0;
-				boolean secuencia = false;
-				
-				while (!secuencia) {
 
-		            if (traductorBooleansContra[k] == 0) {
-		            	posicion = k;
-		            	secuencia = true;
-		            }
-		            k++;
-		        }
-				
-			
-					
+				error = MetodosArrayslib.buscarCoincidenciaArray(traductorBooleansContra, 0);
+
+				if (error) {
+					int k = 0;
+					int posicion = 0;
+					boolean secuencia = false;
+
+					while (!secuencia && k < traductorBooleansContra.length) {
+						if (traductorBooleansContra[k] == 0) {
+							posicion = k;
+							secuencia = true;
+						}
+						k++;
+					}
+
 					switch (posicion) {
 					case 0:
-		                System.out.println("Error: Longitud incorrecta (8-20 caracteres)");
-		                break;
-		            case 1:
-		                System.out.println("Error: Falta Mayuscula");
-		                break;
-		            case 2:
-		                System.out.println("Error: Falta Minuscula");
-		                break;
-		            case 3:
-		                System.out.println("Error: Falta caracter especial *_%$");
-		                break;
-		            case 4:
-		                System.out.println("Error: Falta digitos");
-		                break;
-						}
-				
-				
+						System.out.println("Error: Longitud incorrecta (8-20 caracteres)");
+						break;
+					case 1:
+						System.out.println("Error: Falta Mayúscula");
+						break;
+					case 2:
+						System.out.println("Error: Falta Minúscula");
+						break;
+					case 3:
+						System.out.println("Error: Falta caracter especial *_%$");
+						break;
+					case 4:
+						System.out.println("Error: Falta dígitos");
+						break;
+					}
 				} else {
-					
 					tabla[fila][1] = password;
 					fila++;
 					System.out.println("\nTu contraseña se ha guardado perfectamente!");
-					
-					
 				}
-				
-				
-				
 			} else {
-				
-				System.out.println("\nTu contraseña no contiene caracteristicas basicas");
+				System.out.println("\nTu contraseña no contiene características básicas");
 			}
-			
-			
-			
+
+		} while (fila < tabla.length && tabla[fila][0] != null);
+	}
+	
+	public static void main(String[] args) {
+        //DECLARAMOS VARIABLES
+		int fil;
+		String [][] tabla;
+		// INICIALIZAMOS VARIABLES
 		
+		fil = MetodosEntradaslib.numUsuario("==Gestor de correos==", "\nIntroduce cantidad de correos que te gustari introducir:",
+		"\nMaximo puedes introducir 5", "\nMinimo necesitas introducir 2 correos", 5, 2);
 		
-		} while (fila < fil);
+		tabla = new String [fil][2];			//INDEPENDIENTEMENTE DE SI HAY 5 O 2 CORREO SIEMPRE HBARA 1 COLUMNA
+		
+		//RELLENAMOS MATRIZ CON LOGICAS DE COMPROBACION
+		procesarCorreo(tabla, fil);
+
+		procesarContrasenas(tabla, fil);
+		
+		int [] repetido;
+		int espacioArray = tabla.length * (tabla.length - 1);
+		repetido = new int [espacioArray];
+		
+		correoRepetido(tabla, repetido);
+		
+		int suma = MetodosArrayslib.sumaValorTotalArray(repetido);
+		
+		if (suma != 0) {
+			System.out.println("Tienes correos repetidos");
+			
+			for (int f = 0; f < tabla.length; f++) {  
+	                System.out.print(tabla[f][0] + " ");
+	            
+	            System.out.println();
+	        }
+			int accion = 0;
+			do {
+			    accion = MetodosEntradaslib.numeroUsuario("¿Qué correo quieres eliminar? (1-" + tabla.length + "):");
+			} while (accion < 1 || accion > tabla.length); 
+			
+			int traductor = accion - 1;
+			
+			tabla[traductor][0] = " ";
+			
+			
+			
+			
+			
+			
+			
+		}
 		
   }
 }

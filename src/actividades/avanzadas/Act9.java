@@ -6,7 +6,8 @@ public class Act9 {
 	static Scanner sc = new Scanner(System.in); //DECLARAMOS SCANNER
 	public static void main(String[] args) {
 		
-		
+		//DECLARAMOS VARIABLES
+		int x = 1;
 
 	}
 

@@ -6,7 +6,6 @@ import java.util.Scanner;
 
 import arrays.MetodosArrayslib;
 import datosentrada.MetodosEntradaslib;
-import matrices.MetodosMatriceslib;
 
 //Verificacion de correo electronico y contraseña
 public class Act8 {
@@ -59,7 +58,7 @@ public class Act8 {
 		
 		//DICTAMINAMOS TAMAÑOS
 		while (caracteres[i] != '@') {
-			
+			 
 			//SI EL CARACTER ACTUAL NO ES "@" NO TERMINA EL BUCLE
 			contador++;											//INCREMENTAMOS CARACTER NO "@"
 			i++; 												//INCREMENTAMOS I HASTA QUE ENCUENTRA LA POSICION DE @

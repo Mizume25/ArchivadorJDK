@@ -15,8 +15,10 @@ public class Act11 {
 	public static void llenarArray (int max, int []arr) {
 		//DECLARAMOS VARIABLES
 		int min;
+		int diff;
 		//INICIALIZAMOS VARIABLES
-		min = max - 4;
+		diff = rand.nextInt(3) + 3; // Rango de minimo
+		min = max - diff; 			//Rango de maximos 
 		
 		for (int i = 0; i < arr.length; i++) {
 				arr[i] = rand.nextInt(max - min + 1) + min;
@@ -24,7 +26,67 @@ public class Act11 {
 		
 	}
 	
-	//FUNCION QUE CUNETA LA RACHA MAS ALTA
+	//2º FUNCION QUE CUNETA LA RACHA MAS ALTA
+	public static int contadorRachas (int [] arr) {
+		
+		//DECLARAMOS VARIABLES
+		int indexMax;
+		int indexMin;
+		int valorMax;
+		int valorMin;
+		int [] rachas;
+		
+		int cont;
+		//INICIALIZAMOS VARIABLES
+		indexMax = MetodosArrayslib.maxValorArray(arr);
+		valorMax = arr[indexMax];
+		
+		
+		indexMin = MetodosArrayslib.minValorArray(arr);
+		valorMin = arr[indexMin];
+		
+		//HABRA TANTAS NUMERO DE RACHAS COMO DIFERENCIA HAYA ENTRE VALOR MAX Y MIN
+		rachas = new int [valorMax - valorMin];
+		int k = 0;;
+		int y;
+		int j = rachas.length - 1;
+		for (int i = 0; i < arr.length; i++) {
+			
+			if (arr[i] != valorMax && arr[i] != valorMin) {
+				
+				k++;
+				
+				do {
+					
+					if (arr[i] != valorMax && arr[i] != valorMin) {
+						
+						rachas[0 + k]++;		
+					}
+					
+					i++;
+					
+				} while (arr[i] != valorMax && arr[i] != valorMin);
+				
+				
+			}
+			
+			if (arr[i] == valorMin) {
+				rachas[0]++;
+			}
+			
+			if (arr[i] == valorMax) {
+				rachas[j]++;
+			}
+			
+			
+		}
+		
+		
+		
+		return MetodosArrayslib.maxValorArray(rachas);
+	}
+	
+	
 	
 	public static void main(String[] args) {
 		
@@ -42,8 +104,8 @@ public class Act11 {
 		
 		llenarArray(max, arr);
 		
-		MetodosArrayslib.mostrarArray(arr);
-		
+		int posicion = contadorRachas(arr);
+		System.out.println(posicion);
 		
 
 	}

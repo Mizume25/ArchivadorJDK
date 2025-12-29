@@ -352,4 +352,30 @@ public class MetodosArrayslib {
         return posicion;
 
     }
+    
+    // MÉTODO: Metodo que calcula el valor minimo y devuelve la poscion de ese valor
+    // PARÁMETROS: 1 array double
+    public static int minValorArray(int[] arrayint) {
+
+        // DECLARAMOS VARIABLES
+        double valorMin;
+        int posicion;
+
+        // INICIALIZAMOS INDEX
+        valorMin = arrayint[0]; // Punto de partida
+        posicion = 0;
+
+        // RECORREMOS EL ARRAY EN BUSCA DEL PROMEDIO MAYOR
+        for (int i = 1; i < arrayint.length; i++) {
+
+            if (valorMin > arrayint[i]) {
+                // ACTUALIZAMOS VALOR Y POSICION
+            	valorMin = arrayint[i];
+                posicion = i;
+            }
+        }
+
+        return posicion;
+
+    }
 }

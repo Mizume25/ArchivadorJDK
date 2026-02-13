@@ -800,7 +800,7 @@ public class Act6 {
 		
 		
 		/*NOTA IMPORTANTE: INCLUSO SI LOS DATOS SON RANDOMS EN CUANTO A SU REALIZACION PRINCIPAL (Los puntos de un equipo) en general
-		 * el codigo se encarga ce compilar esos resultados como datos base en los caules se subdesarollara los posteriores calculos 
+		 * El codigo se encarga ce compilar esos resultados como datos base en los caules se subdesarollara los posteriores calculos 
 		 * realizados siemore tomando estos como referencia incluso en interludio de algunos calculos uso randoms para establecer
 		 * secuencia de valores determinados.
 		 * 

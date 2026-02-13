@@ -609,6 +609,7 @@ public class MetodosMatriceslib {
     // MÉTODO: DETERMINA SI UN NÚMERO EXISTE EN LA MATRIZ O NO
     // PARÁMETROS: 1 matriz int, int número
     public static boolean buscarNumeroMatriz(int[][] tabla, int numero) {
+    	
         for (int filas = 0; filas < tabla.length; filas++) {
             for (int columnas = 0; columnas < tabla[filas].length; columnas++) {
                 if (tabla[filas][columnas] == numero) {

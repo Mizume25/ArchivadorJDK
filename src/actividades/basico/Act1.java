@@ -6,6 +6,7 @@ public class Act1 {
 
 	public static void main(String[] args) {
 		//MOSTRAR MENSAJE POR TERMINAL
+		/*
 		System.out.println("Hola Mundo");
 		
 		//DECLARACION DE VARIABLES
@@ -58,7 +59,7 @@ public class Act1 {
 
 		
 		
-		
+		*/
 		
 		
 		

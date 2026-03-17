@@ -83,6 +83,42 @@ public class Matriceslib {
     /////////////////////////////////////////////
     ///// METODOS DE CALCULO DE VALORES//////////
     /////////////////////////////////////////////
+    
+    //METODO: Avarage de Filas con una matriz int
+    public static void avgRows (int [][] table, double [] avarage) throws Exception {
+    	if(table == null) throw new Exception("La matriz no puede ser nula");
+    	if(avarage == null) throw new Exception ("El array no puede ser nulo");
+    	if(table[0].length != avarage.length) throw new Exception("El array debe ser igual que las filas de la matriz");
+    	
+    	int sumTotal;
+    	for (int i = 0; i < avarage.length; i++) {
+    		sumTotal = 0;
+    		
+			for (int j = 0; j < avarage.length; j++) {
+				sumTotal += table[i][j];
+			}
+			
+			avarage[i] += (double)(sumTotal / table[i].length);
+		}
+    }
+    
+    //METODO: Avarage de Filas con una matriz double
+    public static void avgRows (double [][] table, double [] avarage) throws Exception {
+    	if(table == null) throw new Exception("La matriz no puede ser nula");
+    	if(avarage == null) throw new Exception ("El array no puede ser nulo");
+    	if(table[0].length != avarage.length) throw new Exception("El array debe ser igual que las filas de la matriz");
+    	
+    	double sumTotal;
+    	for (int i = 0; i < avarage.length; i++) {
+    		sumTotal = 0;
+    		
+			for (int j = 0; j < avarage.length; j++) {
+				sumTotal += table[i][j];
+			}
+			
+			avarage[i] += (sumTotal / table[i].length);
+		}
+    }
 
     public static int sumTotal(int[][] table) throws Exception {
         if (table == null) throw new Exception("Matriz nula.");

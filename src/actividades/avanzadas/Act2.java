@@ -9,11 +9,16 @@ package actividades.avanzadas;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import lib.Arraylib;
+import lib.Matriceslib;
 import matrices.MetodosMatriceslib;
 
 public class Act2 {
 	static Scanner sc = new Scanner(System.in);
 	public static void main(String[] args) {
+		try {
+			
+		
 		// Inicializamos la tabla que se nos da en el enunciado
         int[][] tabla = {
                 { 2, 4, 1 },
@@ -25,21 +30,30 @@ public class Act2 {
         int[] sumaFilas = new int[3];
         int[] sumaColumnas = new int[3];
 
-        int sumaTotal = MetodosMatriceslib.sumaTotalMatriz(tabla);    // Sumamos el total con el metodos sumaTotalMatriz
+        //int sumaTotal = MetodosMatriceslib.sumaTotalMatriz(tabla);    // Sumamos el total con el metodos sumaTotalMatriz
+        
+        int sumaTotal = Matriceslib.sumTotal(tabla); //Sumamos Total
+        
+        Matriceslib.sumRows(sumaFilas, tabla); //Suma de filas
 
-        MetodosMatriceslib.sumaFilasMatriz(sumaFilas, tabla,0);     //Sumamos las filas con el metodo SumamosFilasMatriz
-
-        MetodosMatriceslib.sumaColumnasMatriz(sumaColumnas, tabla, 0,3);    //Sumamos las columnas con el metodo sumaColumnaMtriz
+        Matriceslib.sumColumns(tabla, sumaColumnas);
+        
+        
+        
 
         // Mostrar resultados
-        MetodosMatriceslib.mostrarMatriz(tabla);
+        Matriceslib.printMatrix(tabla);
         System.out.print("Suma de filas separadas:");
-        System.out.println(Arrays.toString(sumaFilas));
+        Arraylib.printArray(sumaFilas);
 
         System.out.print("Suma de columnas separadas:");
-        System.out.print(Arrays.toString(sumaColumnas));
+        Arraylib.printArray(sumaColumnas);
 
         System.out.println("\nSuma Total de la matriz: " + sumaTotal);
+        
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 
 	}
 

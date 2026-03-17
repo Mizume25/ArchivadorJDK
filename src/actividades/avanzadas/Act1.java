@@ -1,23 +1,27 @@
 package actividades.avanzadas;
-/*1. Crea una matriz 3x3 con números del 1 al 9*
-2. Imprímela en formato de matriz (filas y columnas visibles)*
-3. Extrae e imprime la diagonal principal*
-*/
+	/*	
+	 	1. Crea una matriz 3x3 con números del 1 al 9*
+		2. Imprímela en formato de matriz (filas y columnas visibles)*
+		3. Extrae e imprime la diagonal principal*
+	*/
 import java.util.Scanner;
-
-import matrices.MetodosMatriceslib;
-
+import lib.Matriceslib;
 public class Act1 {
 	static Scanner sc = new Scanner(System.in);
 
 	public static void main(String[] args) {
-		// Inicializamos la matriz de 3x3
+		try {
+			
+		
+		//Declaramos Matriz
 		int[][] tabla = new int[3][3];
-
-		MetodosMatriceslib.llenarMatrizRandom(tabla, 10,0,0); // Imprimimos un metodo que llena el array automaticamente con
-		// numeros random de 0 a 9
-		MetodosMatriceslib.mostrarMatriz(tabla); // Mostramos matriz con otro metodo
-
+		
+		//Funcion de llenar randoms
+		Matriceslib.fillRandom(tabla, 10, 0, 0);
+		
+		//Mostrar Matriz
+		Matriceslib.printMatrix(tabla);
+		
 		System.out.println("\n"); // Salto de linea
 
 		// Imrpimir diagonal principal diagonal
@@ -26,6 +30,10 @@ public class Act1 {
 			System.out.print(tabla[i][i] + " ");
 		}
 		System.out.println("]");
+		
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 
 	}
 
